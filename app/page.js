@@ -1,23 +1,20 @@
 //main homepage of the website
 'use client';
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 
 export default function Home() {
+
+  const [text, setText] = useState('');
+
   return (
-    <div> {/*this is the main div of the page. if i end up making a custom background i need to add another div encompassing*/}
+    <div className='flex'> {/*this is the main div of the page. if i end up making a custom background i need to add another div encompassing*/}
 
-      <header>
-        {/*this is where time and date will be displayed*/}
-        <h1>Wednesday March 12th, 2025          21:09</h1>
-      </header>
-
-
-      <aside>
+      <aside className='flex flex-col justify-between items-center p-10 ml-10'>
         {/*this is where the pop out side nav bar will be*/}
-        <nav>
+        <nav className='flex flex-col items-center justify-center rounded-xl bg-gray-100 px-6 py-6 space-y-8'>
           <Link href="/">
             Home
           </Link>
@@ -55,25 +52,63 @@ export default function Home() {
           </Link>
 
         </nav>
-        
       </aside>
 
+      <div className='ml-15'>
+        <div className="grid grid-cols-1 px-20 mt-10">
+          <header className='items-center transistion-transform duration-300 hover:scale-105 px-14 py-8 rounded-2xl flex flex-col h-auto bg-gray-100 shadow-lg bg-black/20 border border-white/10'>
+              {/*this is where time and date will be displayed*/}
+              <h1>Wednesday March 12th, 2025          21:09</h1>
+            </header>
+        </div>
 
-      <main>
-        {/*this is where the add task bar will be*/}
-        {/*this is where todays task icon will be with progress bar*/}
-        {/*this is where this week's task icon will be with progress bar*/}
-        {/*this is where misc/non-timed task icon will be with progress bar*/}
-        {/*this is where streak completion will be*/}
+        <main>
+          {/*this is where the add task bar will be*/}
 
-        
-      </main>
+          <div className='grid grid-cols-1 jusitfy-center items-center px-20 mt-10'>
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="I have to..."
+              className='bg-white rounded-2xl p-3 italic'
+            />
+          </div>
 
 
-      <footer>
-        {/*I don't actually even know what to put here but i like creating it just to see my template*/}
-      </footer>
+          {/*this is where todays task icon will be with progress bar*/}
+          {/*this is where this week's task icon will be with progress bar*/}
+          {/*this is where misc/non-timed task icon will be with progress bar*/}
+          <div className="grid grid-cols-3 gap-6 px-20 w-full p-10">
+            <div className='items-center transistion-transform duration-300 hover:scale-105 px-14 py-10 rounded-2xl flex flex-col h-auto bg-gray-100 shadow-lg bg-black/20 border border-white/10'>
+                <p>Today</p>
+            </div>
+
+            <div className='items-center transistion-transform duration-300 hover:scale-105 px-14 py-10 rounded-2xl flex flex-col h-auto bg-gray-100 shadow-lg bg-black/20 border border-white/10'>
+                <p>This Week</p>
+            </div>
+
+            <div className='items-center transistion-transform duration-300 hover:scale-105 px-14 py-10 rounded-2xl flex flex-col h-auto bg-gray-100 shadow-lg bg-black/20 border border-white/10'>
+                <p>Whenever</p>
+            </div>
+          </div>
+
+          {/*this is where streak completion will be*/}
+          <div className="flex flex-col justify-between items-center">
+            <div className='flex flex-wrap justify-center rounded-xl bg-gray-100 px-68 py-13 space-x-2 items-center transistion-transform duration-300 hover:scale-105'>
+              <p>Streak Bar</p>
+            </div>
+          </div>
+
+
+        </main>
+
+
+          <footer>
+            {/*I don't actually even know what to put here but i like creating it just to see my template*/}
+          </footer>
+
+      </div>
     </div>
-    
   );
 }
