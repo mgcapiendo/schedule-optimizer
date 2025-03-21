@@ -1,13 +1,49 @@
 //main homepage of the website
 'use client';
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 
 export default function Home() {
 
   const [text, setText] = useState('');
+  const [dateTime, setDateTime] = useState('');
+
+  useEffect(() => {
+    const updateDateTime = () => {
+
+      const currentDate = new Date();
+      
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+      const dayOfWeek = days[currentDate.getDay()];
+      const month = months[currentDate.getMonth()];
+      const day = currentDate.getDate();
+      const year = currentDate.getFullYear();
+
+      const hours = currentDate.getHours();
+      const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+      const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+      const formattedDate = `${dayOfWeek} ${month} ${day}, ${year}`;
+
+      setDateTime(`${formattedDate} ${formattedTime}`);
+
+    };
+    updateDateTime();
+    const timer = setInterval(updateDateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+    
+
+
+
+
+  
 
   return (
     <div className='flex'> {/*this is the main div of the page. if i end up making a custom background i need to add another div encompassing*/}
@@ -58,7 +94,11 @@ export default function Home() {
         <div className="grid grid-cols-1 px-20 mt-10">
           <header className='items-center transistion-transform duration-300 hover:scale-105 px-14 py-8 rounded-2xl flex flex-col h-auto bg-gray-100 shadow-lg bg-black/20 border border-white/10'>
               {/*this is where time and date will be displayed*/}
-              <h1>Wednesday March 12th, 2025          21:09</h1>
+              <div>
+                <p>{dateTime}</p>
+              </div>
+              
+              
             </header>
         </div>
 
